@@ -1,12 +1,19 @@
 <template>
   <div id="app">
     <Navigation></Navigation>
+
+    <div class="figures-container">
+      <FigureComponent bgColor="green" caption="Matematik"></FigureComponent>
+      <FigureComponent bgColor="pink" caption="Modersmål"></FigureComponent>
+    </div>
+
     <h1>{{ message }}</h1>
   </div>
 </template>
 
 <script>
 import Navigation from "./components/Navigation.vue";
+import FigureComponent from "./components/FigureComponent.vue";
 import axios from "axios";
 
 export default {
@@ -17,6 +24,7 @@ export default {
   },
   components: {
     Navigation,
+    FigureComponent,
   },
   mounted() {
     axios
@@ -48,5 +56,11 @@ body {
   align-items: center;
   text-align: center;
   margin-top: 20px;
+}
+
+.figures-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 </style>
