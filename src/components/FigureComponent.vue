@@ -1,39 +1,37 @@
 <template>
-  <figure :style="{ backgroundColor: bgColor }">
-    <figcaption>{{ caption }}</figcaption>
-  </figure>
+  <div
+    class="figure-component"
+    :style="{ backgroundColor: bgColor }"
+    @click="handleClick"
+  >
+    <p>{{ caption }}</p>
+  </div>
 </template>
 
 <script>
 export default {
   props: {
-    bgColor: {
-      type: String,
-      required: true,
-    },
-    caption: {
-      type: String,
-      required: true,
+    bgColor: String,
+    caption: String,
+  },
+  methods: {
+    handleClick() {
+      this.$emit("figure-click", this.caption);
     },
   },
 };
 </script>
 
-<style>
-figure {
+<style scoped>
+.figure-component {
   width: 150px;
   height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid #333;
-  border-radius: 10px;
-  margin: 20px;
-}
-
-figcaption {
-  font-size: 1.2rem;
   color: white;
-  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 18px;
 }
 </style>
