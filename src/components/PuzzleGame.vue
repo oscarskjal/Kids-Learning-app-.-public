@@ -12,11 +12,18 @@
       </div>
     </div>
     <button @click="shuffleTiles">Shuffle</button>
+    <button @click="toggleFigures">Back to Figures</button>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    toggleFigures: {
+      type: Function,
+      required: true,
+    },
+  },
   data() {
     return {
       tiles: ["1", "2", "3", "4", "5", "6", "7", "8", ""],
@@ -42,6 +49,7 @@ export default {
 
       const sameRow =
         Math.floor(index / rowSize) === Math.floor(emptyIndex / rowSize);
+
       if (!sameRow && (index === emptyIndex - 1 || index === emptyIndex + 1)) {
         return;
       }
@@ -57,6 +65,9 @@ export default {
       } else {
         console.log("Invalid move");
       }
+    },
+    toggleFigures() {
+      this.toggleFigures();
     },
   },
 };

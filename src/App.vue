@@ -2,27 +2,21 @@
   <div id="app">
     <Navigation @toggle-settings="toggleSettings"></Navigation>
 
-    <div v-if="!isPuzzleGameActive" class="figures-container">
-      <FigureComponent
-        bgColor="green"
-        caption="Matematik"
-        @figure-click="handleFigureClick"
-      ></FigureComponent>
-      <FigureComponent
-        bgColor="pink"
-        caption="Modersmål"
-        @figure-click="handleFigureClick"
-      ></FigureComponent>
+    <LoadingScreen :isVisible="isLoading" />
+
+    <div class="figures-container" v-if="!showPuzzle && !isLoading">
+      <FigureComponent bgColor="green" caption="Matematik"></FigureComponent>
+      <FigureComponent bgColor="pink" caption="Modersmål"></FigureComponent>
       <FigureComponent
         bgColor="blue"
         caption="Pussel"
-        @figure-click="handleFigureClick"
+        @click="startLoading"
       ></FigureComponent>
     </div>
 
-    <h1 v-if="!isPuzzleGameActive">{{ message }}</h1>
+    <PuzzleGame v-if="showPuzzle" :toggleFigures="toggleFigures" />
 
-    <PuzzleGame v-if="isPuzzleGameActive" />
+    <h1>{{ message }}</h1>
 
     <SettingsWidget :isVisible="showSettings"></SettingsWidget>
   </div>
@@ -31,8 +25,9 @@
 <script>
 import Navigation from "./components/Navigation.vue";
 import FigureComponent from "./components/FigureComponent.vue";
-import PuzzleGame from "./components/PuzzleGame.vue";
 import SettingsWidget from "./components/Settingswidget.vue";
+import PuzzleGame from "./components/PuzzleGame.vue";
+import LoadingScreen from "./components/Loadingscreen.vue";
 import axios from "axios";
 
 export default {
@@ -40,23 +35,30 @@ export default {
     return {
       message: "",
       showSettings: false,
-      isPuzzleGameActive: false,
+      showPuzzle: false,
+      isLoading: false,
     };
   },
   components: {
     Navigation,
     FigureComponent,
-    PuzzleGame,
     SettingsWidget,
+    PuzzleGame,
+    LoadingScreen,
   },
   methods: {
     toggleSettings() {
       this.showSettings = !this.showSettings;
     },
-    handleFigureClick(caption) {
-      if (caption === "Pussel") {
-        this.isPuzzleGameActive = true;
-      }
+    startLoading() {
+      this.isLoading = true;
+      setTimeout(() => {
+        this.isLoading = false;
+        this.showPuzzle = true;
+      }, 6000);
+    },
+    toggleFigures() {
+      this.showPuzzle = false;
     },
   },
   mounted() {
