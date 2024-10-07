@@ -13,6 +13,8 @@
     </div>
     <button @click="shuffleTiles">Shuffle</button>
     <button @click="toggleFigures">Back to Figures</button>
+
+    <div v-if="isGameWon" class="winning-message">{{ winningMessage }}</div>
   </div>
 </template>
 
@@ -27,6 +29,9 @@ export default {
   data() {
     return {
       tiles: ["1", "2", "3", "4", "5", "6", "7", "8", ""],
+      moveCount: 0,
+      isGameWon: false,
+      winningMessage: "",
     };
   },
   methods: {
@@ -35,6 +40,9 @@ export default {
         .map((tile) => ({ tile, sort: Math.random() }))
         .sort((a, b) => a.sort - b.sort)
         .map(({ tile }) => tile);
+      this.moveCount = 0;
+      this.isGameWon = false;
+      this.winningMessage = "";
     },
     moveTile(index) {
       const emptyIndex = this.tiles.indexOf("");
@@ -58,12 +66,28 @@ export default {
         console.log(
           `Moving tile at index ${index} to empty space at index ${emptyIndex}`
         );
+
         [this.tiles[emptyIndex], this.tiles[index]] = [
           this.tiles[index],
           this.tiles[emptyIndex],
         ];
+
+        this.moveCount++;
+
+        this.checkWin();
       } else {
         console.log("Invalid move");
+      }
+    },
+    checkWin() {
+      const winningTiles = ["1", "2", "3", "4", "5", "6", "7", "8", ""];
+      if (this.tiles.toString() === winningTiles.toString()) {
+        if (this.moveCount < 50) {
+          this.winningMessage = "Fantastiskt!!";
+        } else {
+          this.winningMessage = "Bra gjort!";
+        }
+        this.isGameWon = true;
       }
     },
     toggleFigures() {
@@ -103,5 +127,12 @@ export default {
 .tile.empty {
   background-color: #fff;
   cursor: default;
+}
+
+.winning-message {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+  color: green;
 }
 </style>

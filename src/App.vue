@@ -29,6 +29,7 @@ import SettingsWidget from "./components/Settingswidget.vue";
 import PuzzleGame from "./components/PuzzleGame.vue";
 import LoadingScreen from "./components/Loadingscreen.vue";
 import axios from "axios";
+import backgroundImage from "@/assets/skogbakgrund.jpg";
 
 export default {
   data() {
@@ -37,6 +38,7 @@ export default {
       showSettings: false,
       showPuzzle: false,
       isLoading: false,
+      backgroundImage,
     };
   },
   components: {
@@ -88,6 +90,10 @@ body {
   justify-content: flex-start;
   height: 100vh;
   filter: brightness(var(--brightness));
+  background-image: url("@/assets/skogbakgrund.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #app {
@@ -96,11 +102,18 @@ body {
   align-items: center;
   text-align: center;
   margin-top: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .figures-container {
   display: flex;
   justify-content: center;
   gap: 20px;
+  margin-top: 50px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  padding: 20px;
+  z-index: 2;
 }
 </style>
