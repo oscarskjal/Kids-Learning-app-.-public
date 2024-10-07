@@ -1,12 +1,17 @@
 <template>
-  <div id="app">
+  <div id="app"
+    >
     <Navigation @toggle-settings="toggleSettings"></Navigation>
 
     <LoadingScreen :isVisible="isLoading" />
 
-    <div class="figures-container" v-if="!showPuzzle && !isLoading">
+    <div class="figures-container" v-if="!showPuzzle && !isLoading && !showModersmal">
       <FigureComponent bgColor="green" caption="Matematik"></FigureComponent>
-      <FigureComponent bgColor="pink" caption="Modersmål"></FigureComponent>
+      <FigureComponent
+        bgColor="pink"
+        caption="Modersmål"
+        @click="showModersmal = true"
+      ></FigureComponent>
       <FigureComponent
         bgColor="blue"
         caption="Pussel"
@@ -14,6 +19,7 @@
       ></FigureComponent>
     </div>
 
+    <Modersmål v-if="showModersmal" :backToFigures="() => { showModersmal = false; toggleFigures(); }" />
     <PuzzleGame v-if="showPuzzle" :toggleFigures="toggleFigures" />
 
     <h1>{{ message }}</h1>
@@ -23,6 +29,7 @@
 </template>
 
 <script>
+import Modersmål from "./components/Modersmål.vue";
 import Navigation from "./components/Navigation.vue";
 import FigureComponent from "./components/FigureComponent.vue";
 import SettingsWidget from "./components/Settingswidget.vue";
@@ -30,6 +37,10 @@ import PuzzleGame from "./components/PuzzleGame.vue";
 import LoadingScreen from "./components/Loadingscreen.vue";
 import axios from "axios";
 import backgroundImage from "@/assets/skogbakgrund.jpg";
+import spaceBg from "@/assets/Space1.jpg";
+
+
+
 
 export default {
   data() {
@@ -38,6 +49,7 @@ export default {
       showSettings: false,
       showPuzzle: false,
       isLoading: false,
+      showModersmal: false,
       backgroundImage,
     };
   },
@@ -47,6 +59,17 @@ export default {
     SettingsWidget,
     PuzzleGame,
     LoadingScreen,
+    Modersmål,
+  },
+
+  watch: {
+    showModersmal(newValue) {
+      if (newValue) {
+        document.body.style.backgroundImage = 'url(/Space1.jpg)';
+      } else {
+        document.body.style.backgroundImage = 'url(/Skogbakgrund.jpg)';
+      }
+    }
   },
   methods: {
     toggleSettings() {
@@ -60,10 +83,15 @@ export default {
       }, 6000);
     },
     toggleFigures() {
+      this.showModersmal = false;
       this.showPuzzle = false;
     },
   },
   mounted() {
+
+    document.body.style.backgroundImage = 'url(/Skogbakgrund.jpg)';
+
+
     axios
       .get("http://localhost:5000/api/hello")
       .then((response) => {
@@ -90,7 +118,6 @@ body {
   justify-content: flex-start;
   height: 100vh;
   filter: brightness(var(--brightness));
-  background-image: url("@/assets/skogbakgrund.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
