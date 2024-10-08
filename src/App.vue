@@ -19,7 +19,7 @@
       ></FigureComponent>
     </div>
 
-    <Modersmål v-if="showModersmal" :backToFigures="() => { showModersmal = false; toggleFigures(); }" />
+    <Modersmål v-if="showModersmal" :toggleFigures="() => { showModersmal = false; toggleFigures(); }" />
     <PuzzleGame v-if="showPuzzle" :toggleFigures="toggleFigures" />
 
     <h1>{{ message }}</h1>
@@ -121,6 +121,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  transition: background-image 5s ease-in-out;
 }
 
 #app {
