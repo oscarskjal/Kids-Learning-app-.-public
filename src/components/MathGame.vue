@@ -1,4 +1,6 @@
 <template>
+    <div id="math-game"></div>
+    <h1>Matematik Spel</h1>
     <div id="games-container">
       <div id="game1-container">
         <h2>Beräkna</h2>
@@ -184,6 +186,25 @@
   </script>
   
   <style scoped>
+  body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-image: url('./assets/background.jpg'); /* Bakgrundsbild */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #4CAF50;
+    font-size: 70px;
+    margin-bottom: 20px;
+}
+
 #games-container {
     display: flex;
     justify-content: center;

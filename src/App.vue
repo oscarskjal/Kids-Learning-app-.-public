@@ -5,8 +5,12 @@
 
     <LoadingScreen :isVisible="isLoading" />
 
-    <div class="figures-container" v-if="!showPuzzle && !isLoading && !showModersmal">
-      <FigureComponent bgColor="green" caption="Matematik"></FigureComponent>
+    <div class="figures-container" v-if="!showPuzzle && !isLoading && !showModersmal && !showMathGame">
+      <FigureComponent 
+      bgColor="green" 
+      caption="Matematik"
+      @click="showMathGame = true"
+      ></FigureComponent>
       <FigureComponent
         bgColor="pink"
         caption="Modersmål"
@@ -18,7 +22,7 @@
         @click="startLoading"
       ></FigureComponent>
     </div>
-
+    <MathGame v-if="showMathGame" :toggleFigures="toggleFigures" />
     <Modersmål v-if="showModersmal" :toggleFigures="() => { showModersmal = false; toggleFigures(); }" />
     <PuzzleGame v-if="showPuzzle" :toggleFigures="toggleFigures" />
 
@@ -35,9 +39,11 @@ import FigureComponent from "./components/FigureComponent.vue";
 import SettingsWidget from "./components/Settingswidget.vue";
 import PuzzleGame from "./components/PuzzleGame.vue";
 import LoadingScreen from "./components/Loadingscreen.vue";
+import MathGame from "./components/MathGame.vue";
 import axios from "axios";
 import backgroundImage from "@/assets/skogbakgrund.jpg";
 import spaceBg from "@/assets/Space1.jpg";
+import mathBackground from "@/assets/background.jpg";
 
 
 
@@ -50,6 +56,7 @@ export default {
       showPuzzle: false,
       isLoading: false,
       showModersmal: false,
+      showMathGame: false,
       backgroundImage,
     };
   },
@@ -60,6 +67,7 @@ export default {
     PuzzleGame,
     LoadingScreen,
     Modersmål,
+    MathGame,
   },
 
   watch: {
@@ -69,8 +77,17 @@ export default {
       } else {
         document.body.style.backgroundImage = 'url(/Skogbakgrund.jpg)';
       }
+  },
+
+  showMathGame(newValue) {
+      if (newValue) {
+        document.body.style.backgroundImage = `url(/background.jpg)`;
+      } else {
+        document.body.style.backgroundImage = 'url(/Skogbakgrund.jpg)';
+      }
     }
   },
+
   methods: {
     toggleSettings() {
       this.showSettings = !this.showSettings;
@@ -85,6 +102,7 @@ export default {
     toggleFigures() {
       this.showModersmal = false;
       this.showPuzzle = false;
+      this.showMathGame = false;
     },
   },
   mounted() {
