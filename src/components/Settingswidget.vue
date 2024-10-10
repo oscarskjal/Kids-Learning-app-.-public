@@ -29,10 +29,7 @@ export default {
   },
   methods: {
     changeBrightness() {
-      document.documentElement.style.setProperty(
-        "--brightness",
-        this.brightness
-      );
+      this.$emit("brightness-change", this.brightness);
     },
   },
 };

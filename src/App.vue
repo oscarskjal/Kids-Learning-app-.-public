@@ -1,15 +1,18 @@
 <template>
-  <div id="app"
-    >
+  <div id="app">
+    <div class="background-overlay"></div>
     <Navigation @toggle-settings="toggleSettings"></Navigation>
 
     <LoadingScreen :isVisible="isLoading" />
 
-    <div class="figures-container" v-if="!showPuzzle && !isLoading && !showModersmal && !showMathGame">
-      <FigureComponent 
-      bgColor="green" 
-      caption="Matematik"
-      @click="showMathGame = true"
+    <div
+      class="figures-container"
+      v-if="!showPuzzle && !isLoading && !showModersmal && !showMathGame"
+    >
+      <FigureComponent
+        bgColor="green"
+        caption="Matematik"
+        @click="showMathGame = true"
       ></FigureComponent>
       <FigureComponent
         bgColor="pink"
@@ -22,13 +25,25 @@
         @click="startLoading"
       ></FigureComponent>
     </div>
+
     <MathGame v-if="showMathGame" :toggleFigures="toggleFigures" />
-    <Modersmål v-if="showModersmal" :toggleFigures="() => { showModersmal = false; toggleFigures(); }" />
+    <Modersmål
+      v-if="showModersmal"
+      :toggleFigures="
+        () => {
+          showModersmal = false;
+          toggleFigures();
+        }
+      "
+    />
     <PuzzleGame v-if="showPuzzle" :toggleFigures="toggleFigures" />
 
     <h1>{{ message }}</h1>
 
-    <SettingsWidget :isVisible="showSettings"></SettingsWidget>
+    <SettingsWidget
+      :isVisible="showSettings"
+      @brightness-change="handleBrightnessChange"
+    ></SettingsWidget>
   </div>
 </template>
 
@@ -42,11 +57,6 @@ import LoadingScreen from "./components/Loadingscreen.vue";
 import MathGame from "./components/MathGame.vue";
 import axios from "axios";
 import backgroundImage from "@/assets/skogbakgrund.jpg";
-import spaceBg from "@/assets/Space1.jpg";
-import mathBackground from "@/assets/background.jpg";
-
-
-
 
 export default {
   data() {
@@ -58,6 +68,7 @@ export default {
       showModersmal: false,
       showMathGame: false,
       backgroundImage,
+      brightness: 1,
     };
   },
   components: {
@@ -69,25 +80,6 @@ export default {
     Modersmål,
     MathGame,
   },
-
-  watch: {
-    showModersmal(newValue) {
-      if (newValue) {
-        document.body.style.backgroundImage = 'url(/Space1.jpg)';
-      } else {
-        document.body.style.backgroundImage = 'url(/Skogbakgrund.jpg)';
-      }
-  },
-
-  showMathGame(newValue) {
-      if (newValue) {
-        document.body.style.backgroundImage = `url(/background.jpg)`;
-      } else {
-        document.body.style.backgroundImage = 'url(/Skogbakgrund.jpg)';
-      }
-    }
-  },
-
   methods: {
     toggleSettings() {
       this.showSettings = !this.showSettings;
@@ -104,11 +96,15 @@ export default {
       this.showPuzzle = false;
       this.showMathGame = false;
     },
+    handleBrightnessChange(newBrightness) {
+      this.brightness = newBrightness;
+      document.querySelector(
+        ".background-overlay"
+      ).style.filter = `brightness(${newBrightness})`;
+    },
   },
   mounted() {
-
-    document.body.style.backgroundImage = 'url(/Skogbakgrund.jpg)';
-
+    document.body.style.backgroundImage = `url(${this.backgroundImage})`;
 
     axios
       .get("http://localhost:5000/api/hello")
@@ -123,23 +119,14 @@ export default {
 </script>
 
 <style>
-:root {
-  --brightness: 1;
-}
-
 body {
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
   height: 100vh;
-  filter: brightness(var(--brightness));
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: background-image 5s ease-in-out;
+  position: relative;
 }
 
 #app {
@@ -147,16 +134,34 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-top: 20px;
+
+  padding-top: 20px;
   position: relative;
   z-index: 1;
+  height: 100vh;
+  justify-content: flex-start;
+}
+
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-image: url("@/assets/skogbakgrund.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(1);
+  transition: filter 0.3s ease;
 }
 
 .figures-container {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-top: 50px;
+  margin-top: 30px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 8px;
   padding: 20px;
