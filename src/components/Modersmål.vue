@@ -55,17 +55,13 @@ export default {
     return {
       sentences: [],
       easySentences: [
-        { text: "Jag har ___ bok", correctWord: "en", options: ["en", "ett"], completed: false, isWrong: false },
-        { text: "Hon springer ___ snabbt", correctWord: "väldigt", options: ["väldigt", "väldig"], completed: false, isWrong: false },
-        { text: "Vi går till ___ butiken", correctWord: "den", options: ["den", "det"], completed: false, isWrong: false },
-        { text: "Jag såg ___ igår", correctWord: "honom", options: ["honom", "han"], completed: false, isWrong: false },     
-        { text: "De bor i ___ stort hus", correctWord: "ett", options: ["ett", "en"], completed: false, isWrong: false },
-        { text: "Vi har inte läst ___ bok än", correctWord: "vår", options: ["vår", "vårt"], completed: false, isWrong: false },
-        { text: "Jag åker till ___ hemstad imorgon", correctWord: "min", options: ["mitt", "min"], completed: false, isWrong: false }, 
-        { text: "Vi har ___ bil", correctWord: "en", options: ["en", "ett"], completed: false, isWrong: false },
-        { text: "De visste inte om de ___ glömt nycklarna hemma", correctWord: "hade", options: ["hade", "har"], completed: false, isWrong: false },    
-        { text: "Hon har alltid ___ med sig", correctWord: "dem", options: ["dem", "de"], completed: false, isWrong: false }
-      ],
+      { text: "Jag har ___ hund", correctWord: "en", options: ["en", "ett"], completed: false, isWrong: false },
+      { text: "Det är ___ fint väder idag", correctWord: "mycket", options: ["mycke", "mycket"], completed: false, isWrong: false },
+      { text: "Han äter ___ frukost", correctWord: "sin", options: ["sin", "sina"], completed: false, isWrong: false },
+      { text: "Vi ser ___ film ikväll", correctWord: "en", options: ["en", "ett"], completed: false, isWrong: false },
+      { text: "Jag vill ha ___ glass", correctWord: "en", options: ["en", "ett"], completed: false, isWrong: false },
+    ],
+
       hardSentences: [
         { text: "Jag har ___ bok", correctWord: "en", options: ["en", "ett"], completed: false, isWrong: false },
         { text: "Hon springer ___ snabbt", correctWord: "väldigt", options: ["väldigt", "väldig"], completed: false, isWrong: false },
