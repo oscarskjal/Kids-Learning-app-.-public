@@ -37,6 +37,7 @@ export default {
 
 <style scoped>
 .settings-widget {
+  color: black;
   position: fixed;
   top: 60px;
   right: 20px;
