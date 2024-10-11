@@ -10,12 +10,12 @@
       v-if="!showPuzzle && !isLoading && !showModersmal && !showMathGame"
     >
       <FigureComponent
-        bgColor="green"
-        caption="Matematik"
+      bgColor="rgb(250, 90, 247)"
+              caption="Matematik"
         @click="startLoading('math')"
       ></FigureComponent>
       <FigureComponent
-        bgColor="pink"
+        bgColor="green"
         caption="Modersmål"
         @click="startLoading('modersmal')"
       ></FigureComponent>
@@ -137,6 +137,7 @@ body {
 }
 
 #app {
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -164,7 +165,10 @@ body {
   transition: filter 0.3s ease;
 }
 
+
+
 .figures-container {
+
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -173,5 +177,12 @@ body {
   border-radius: 8px;
   padding: 20px;
   z-index: 2;
+}
+
+.figures-container p {
+  font-weight: 600;
+
+  font-size: 24px;
+  margin: 0;
 }
 </style>
