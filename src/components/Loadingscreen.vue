@@ -72,6 +72,7 @@ export default {
 }
 
 .loading-box {
+  color: black;
   display: flex;
   align-items: center;
   padding: 20px;
