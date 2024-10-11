@@ -12,17 +12,17 @@
       <FigureComponent
         bgColor="green"
         caption="Matematik"
-        @click="showMathGame = true"
+        @click="startLoading('math')"
       ></FigureComponent>
       <FigureComponent
         bgColor="pink"
         caption="Modersmål"
-        @click="showModersmal = true"
+        @click="startLoading('modersmal')"
       ></FigureComponent>
       <FigureComponent
         bgColor="blue"
         caption="Pussel"
-        @click="startLoading"
+        @click="startLoading('puzzle')"
       ></FigureComponent>
     </div>
 
@@ -84,11 +84,18 @@ export default {
     toggleSettings() {
       this.showSettings = !this.showSettings;
     },
-    startLoading() {
+    startLoading(gameType) {
       this.isLoading = true;
       setTimeout(() => {
         this.isLoading = false;
-        this.showPuzzle = true;
+
+        if (gameType === "math") {
+          this.showMathGame = true;
+        } else if (gameType === "modersmal") {
+          this.showModersmal = true;
+        } else if (gameType === "puzzle") {
+          this.showPuzzle = true;
+        }
       }, 6000);
     },
     toggleFigures() {
