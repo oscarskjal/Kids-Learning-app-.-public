@@ -1,10 +1,6 @@
-<!-- Navigation.vue -->
 <template>
   <nav>
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-
       <li><button @click="toggleSettings">Inställningar</button></li>
     </ul>
   </nav>
