@@ -10,8 +10,8 @@
       v-if="!showPuzzle && !isLoading && !showModersmal && !showMathGame"
     >
       <FigureComponent
-      bgColor="rgb(250, 90, 247)"
-              caption="Matematik"
+        bgColor="rgb(250, 90, 247)"
+        caption="Matematik"
         @click="startLoading('math')"
       ></FigureComponent>
       <FigureComponent
@@ -57,6 +57,7 @@ import LoadingScreen from "./components/Loadingscreen.vue";
 import MathGame from "./components/MathGame.vue";
 import axios from "axios";
 import backgroundImage from "@/assets/skogbakgrund.jpg";
+import spaceBackground from "@/assets/Space1.jpg";
 
 export default {
   data() {
@@ -81,6 +82,14 @@ export default {
     MathGame,
   },
   methods: {
+    showModersmalGame() {
+      this.showModersmal = true;
+      document.querySelector(".background-overlay").style.backgroundImage = `url(${spaceBackground})`;
+    },
+    backToMenu() {
+      this.showModersmal = false;
+      document.querySelector(".background-overlay").style.backgroundImage = `url(${backgroundImage})`;
+    },
     toggleSettings() {
       this.showSettings = !this.showSettings;
     },
@@ -93,6 +102,7 @@ export default {
           this.showMathGame = true;
         } else if (gameType === "modersmal") {
           this.showModersmal = true;
+          this.showModersmalGame();
         } else if (gameType === "puzzle") {
           this.showPuzzle = true;
         }
@@ -102,6 +112,7 @@ export default {
       this.showModersmal = false;
       this.showPuzzle = false;
       this.showMathGame = false;
+      this.backToMenu();
     },
     handleBrightnessChange(newBrightness) {
       this.brightness = newBrightness;
@@ -111,7 +122,7 @@ export default {
     },
   },
   mounted() {
-    document.body.style.backgroundImage = `url(${this.backgroundImage})`;
+    document.querySelector(".background-overlay").style.backgroundImage = `url(${this.backgroundImage})`;
 
     axios
       .get("http://localhost:5000/api/hello")
@@ -137,12 +148,10 @@ body {
 }
 
 #app {
-
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-
   padding-top: 20px;
   position: relative;
   z-index: 1;
@@ -157,7 +166,6 @@ body {
   right: 0;
   bottom: 0;
   z-index: -1;
-  background-image: url("@/assets/skogbakgrund.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -165,10 +173,7 @@ body {
   transition: filter 0.3s ease;
 }
 
-
-
 .figures-container {
-
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -181,7 +186,6 @@ body {
 
 .figures-container p {
   font-weight: 600;
-
   font-size: 24px;
   margin: 0;
 }
