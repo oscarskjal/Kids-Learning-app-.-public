@@ -44,6 +44,10 @@
     </form>
 
     <p v-if="message">{{ message }}</p>
+
+    <div v-if="isLoggedIn">
+      <h4 :style="{ color: timerColor }">Tid spelat: {{ elapsedTime }}</h4>
+    </div>
   </div>
 </template>
 
@@ -66,7 +70,23 @@ export default {
       loginEmail: "",
       loginPassword: "",
       message: "",
+      isLoggedIn: false,
+      elapsedTime: 0,
+      timer: null,
     };
+  },
+  // Färgbyten beroende på hur länge man spelat
+  computed: {
+    timerColor() {
+      if (this.elapsedTime >= 900) {
+        return "red";
+      } else if (this.elapsedTime >= 600) {
+        return "orange";
+      } else if (this.elapsedTime >= 300) {
+        return "#BDAA00";
+      }
+      return "blue";
+    },
   },
   methods: {
     changeBrightness() {
@@ -99,6 +119,8 @@ export default {
         .post("http://localhost:5000/api/login", payload)
         .then((response) => {
           this.message = response.data.message;
+          this.isLoggedIn = true;
+          this.startTimer();
         })
         .catch((error) => {
           this.message =
@@ -107,6 +129,16 @@ export default {
           console.error("Error:", error);
         });
     },
+    startTimer() {
+      this.elapsedTime = 0;
+      if (this.timer) clearInterval(this.timer);
+      this.timer = setInterval(() => {
+        this.elapsedTime++;
+      }, 1000);
+    },
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
   },
 };
 </script>
