@@ -16,7 +16,7 @@
         <button @click="submitAnswer">Beräkna</button>
   
         <div id="score">Poäng: {{ scoreGame1 }}</div>
-        <div>{{ feedback1 }}</div>
+        <div id="feedback1" class="feedback">{{ feedback1 }}</div>
       </div>
   
       <br />
@@ -38,13 +38,17 @@
         </div>
   
         <div id="score2">Poäng: {{ scoreGame2 }}</div>
-        <div>{{ feedback2 }}</div>
+        <div id="feedback2" class="feedback">{{ feedback2 }}</div>
       </div>
+      <button class="back-button" @click="toggleFigures">Tillbaka till Meny</button>
     </div>
   </template>
   
   <script>
   export default {
+
+    props: ['toggleFigures'],
+
     data() {
       return {
         // Spel 1
@@ -250,12 +254,35 @@ button:hover {
     background-color: #ffcc00;
 }
 
+.back-button {
+  background-color: #ff5733;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.5em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.back-button:hover {
+  background-color: #ffcc00;
+}
+
 #score, #score2 {
   font-family: 'Comic Sans MS', cursive, sans-serif;
     font-size: 1.5em;
     margin: 10px 0;
     color: #4CAF50;
 }
+
+.feedback {
+    font-size: 1.5em;
+    margin: 10px 0;
+    color: #e74c3c;
+}
+
 
 #feedback, #feedback2 {
     font-size: 1.5em;
