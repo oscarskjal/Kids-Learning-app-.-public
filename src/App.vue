@@ -26,6 +26,8 @@
       ></FigureComponent>
     </div>
 
+    <Greeting />
+
     <MathGame v-if="showMathGame" :toggleFigures="toggleFigures" />
     <Modersmål
       v-if="showModersmal"
@@ -55,6 +57,7 @@ import SettingsWidget from "./components/Settingswidget.vue";
 import PuzzleGame from "./components/PuzzleGame.vue";
 import LoadingScreen from "./components/Loadingscreen.vue";
 import MathGame from "./components/MathGame.vue";
+import Greeting from "./components/Greeting.vue";
 import axios from "axios";
 import backgroundImage from "@/assets/skogbakgrund.jpg";
 import spaceBackground from "@/assets/Space1.jpg";
@@ -81,6 +84,7 @@ export default {
     LoadingScreen,
     Modersmål,
     MathGame,
+    Greeting,
   },
   methods: {
     showModersmalGame() {
