@@ -16,7 +16,8 @@
         <button @click="submitAnswer">Beräkna</button>
   
         <div id="score">Poäng: {{ scoreGame1 }}</div>
-        <div id="feedback1" class="feedback">{{ feedback1 }}</div>
+        <div id="feedback1" class="feedback" :class="feedback1.class">{{ feedback1.text }}</div>
+
       </div>
   
       <br />
@@ -38,10 +39,10 @@
         </div>
   
         <div id="score2">Poäng: {{ scoreGame2 }}</div>
-        <div id="feedback2" class="feedback">{{ feedback2 }}</div>
+        <div id="feedback2" class="feedback" :class="feedback2.class">{{ feedback2.text }}</div>
       </div>
-      <button class="back-button" @click="toggleFigures">Tillbaka till Meny</button>
     </div>
+    <button class="back-button" @click="toggleFigures">Tillbaka till Meny</button>
   </template>
   
   <script>
@@ -108,15 +109,24 @@
       submitAnswer() {
         const userAnswer = parseInt(this.userAnswer1);
         if (isNaN(userAnswer)) {
-          this.feedback1 = 'Mata in ett giltigt nummer';
+          this.feedback1 = {
+            text: 'Mata in ett giltigt nummer',
+            class: 'wrong-feedback' // Felmeddelande
+        };
           return;
         }
   
         if (userAnswer === this.correctAnswerGame1) {
           this.scoreGame1++;
-          this.feedback1 = 'Rätt';
+          this.feedback1 = {
+            text: 'Rätt!',
+            class: 'correct-feedback' // Rätt svar
+        };
         } else {
-          this.feedback1 = `Fel, rätt svar är ${this.correctAnswerGame1}`;
+          this.feedback1 = {
+            text: `Fel, rätt svar är ${this.correctAnswerGame1}`,
+            class: 'wrong-feedback' // Fel svar
+        };
         }
 
         this.generateProblem(); // Generera nytt problem
@@ -170,16 +180,22 @@
       },
       // Kontrollera det valda svaret i spel 2
       submitMultipleChoiceAnswer(index) {
-        const selectedAnswer = this.multipleChoiceOptions[index];
-        if (selectedAnswer === this.correctAnswerGame2) {
-          this.scoreGame2++;
-          this.feedback2 = 'Rätt';
-        } else {
-          this.feedback2 = `Fel, rätt svar är ${this.correctAnswerGame2}`;
-        }
-  
-        this.generateMultipleChoiceProblem(); // Generera nytt problem
-      },
+    const selectedAnswer = this.multipleChoiceOptions[index];
+    if (selectedAnswer === this.correctAnswerGame2) {
+        this.scoreGame2++;
+        this.feedback2 = {
+            text: 'Rätt!',
+            class: 'correct-feedback' // Rätt svar
+        };
+    } else {
+        this.feedback2 = {
+            text: `Fel, rätt svar är ${this.correctAnswerGame2}`,
+            class: 'wrong-feedback' // Fel svar
+        };
+    }
+
+    this.generateMultipleChoiceProblem(); // Generera nytt problem
+},
     },
     mounted() {
       this.generateProblem();
@@ -192,10 +208,14 @@
   
 
 h1 {
-    color: #4CAF50;
-    font-size: 70px;
-    margin-bottom: 20px;
+  font-family: 'Oswald';
+  background: -webkit-linear-gradient(#4CAF50, #ff5733);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 70px;
+  margin-bottom: 0px;
 }
+
 
 #games-container {
     display: flex;
@@ -262,12 +282,14 @@ button:hover {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .back-button:hover {
   background-color: #ffcc00;
 }
+
+
 
 #score, #score2 {
   font-family: 'Comic Sans MS', cursive, sans-serif;
@@ -279,7 +301,14 @@ button:hover {
 .feedback {
     font-size: 1.5em;
     margin: 10px 0;
-    color: #e74c3c;
+}
+
+.correct-feedback {
+    color: darkgreen;
+}
+
+.wrong-feedback {
+    color: red; 
 }
 
 select {
@@ -298,7 +327,7 @@ select {
 
 select:hover {
     background-color: #f0f0f0;
-    border-color: #ff5733;
+    border-color: #4CAF50;
 }
 
 select option {
