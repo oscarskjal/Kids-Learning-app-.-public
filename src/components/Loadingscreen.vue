@@ -34,7 +34,7 @@ export default {
         "Kom ihåg att ta pauser efter längre sessioner!",
         "Du kan justera ljusstyrkan från inställningarna.",
         "Kom ihåg att dricka vatten!",
-        "Du kan ändra teman från inställningarna.",
+        "Logga in för att se hur länge din session tagit!",
         "Varje spel har flera svårighetsgrader. Pröva en svårare svårighetsgrad om spelet är för lätt!",
       ],
       selectedTip: "",
