@@ -58,6 +58,7 @@ import MathGame from "./components/MathGame.vue";
 import axios from "axios";
 import backgroundImage from "@/assets/skogbakgrund.jpg";
 import spaceBackground from "@/assets/Space1.jpg";
+import waterbackground from "@/assets/background.jpg";
 
 export default {
   data() {
@@ -100,6 +101,7 @@ export default {
 
         if (gameType === "math") {
           this.showMathGame = true;
+          document.querySelector(".background-overlay").style.backgroundImage = `url(${waterbackground})`;
         } else if (gameType === "modersmal") {
           this.showModersmal = true;
           this.showModersmalGame();

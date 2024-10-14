@@ -186,18 +186,7 @@
   </script>
   
   <style scoped>
-  body {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    background-image: url('./assets/background.jpg'); /* Bakgrundsbild */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    color: #333;
-    text-align: center;
-    margin: 0;
-    padding: 20px;
-}
+  
 
 h1 {
     color: #4CAF50;
@@ -222,6 +211,7 @@ h1 {
 }
 
 h2 {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
     color: #4CAF50;
     font-size: 2em;
 }
@@ -261,6 +251,7 @@ button:hover {
 }
 
 #score, #score2 {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
     font-size: 1.5em;
     margin: 10px 0;
     color: #4CAF50;
