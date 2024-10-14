@@ -90,7 +90,6 @@
   
         this.problem1 = `${this.num1} ${this.operation} ${this.num2}`;
         this.calculateCorrectAnswerGame1();
-        this.feedback1 = '';
         this.userAnswer1 = '';
       },
       // Beräkna det korrekta svaret för spel 1
@@ -117,9 +116,9 @@
           this.scoreGame1++;
           this.feedback1 = 'Rätt';
         } else {
-          this.feedback1 = `Fel, rätt svar är ${this.correctAnswerGame1}.`;
+          this.feedback1 = `Fel, rätt svar är ${this.correctAnswerGame1}`;
         }
-  
+
         this.generateProblem(); // Generera nytt problem
       },
   
@@ -142,7 +141,7 @@
         this.problem2 = `${this.num1} ${this.operation} ${this.num2}`;
         this.calculateCorrectAnswerGame2();
         this.generateMultipleChoiceOptions();
-        this.feedback2 = '';
+        
       },
       // Beräkna det korrekta svaret för spel 2
       calculateCorrectAnswerGame2() {
@@ -176,7 +175,7 @@
           this.scoreGame2++;
           this.feedback2 = 'Rätt';
         } else {
-          this.feedback2 = `Fel, rätt svar är ${this.correctAnswerGame2}.`;
+          this.feedback2 = `Fel, rätt svar är ${this.correctAnswerGame2}`;
         }
   
         this.generateMultipleChoiceProblem(); // Generera nytt problem
@@ -278,13 +277,6 @@ button:hover {
 }
 
 .feedback {
-    font-size: 1.5em;
-    margin: 10px 0;
-    color: #e74c3c;
-}
-
-
-#feedback, #feedback2 {
     font-size: 1.5em;
     margin: 10px 0;
     color: #e74c3c;
