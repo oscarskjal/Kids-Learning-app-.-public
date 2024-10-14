@@ -2,7 +2,7 @@
   <transition name="fade">
     <div class="overlay" v-if="isVisible">
       <div class="greeting">
-        <h1>Velkommen till kids learning!</h1>
+        <h1>Välkommen till kids learning!</h1>
       </div>
     </div>
   </transition>
