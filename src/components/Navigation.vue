@@ -1,13 +1,24 @@
 <template>
   <nav>
     <ul>
-      <li><button @click="toggleSettings">Inställningar</button></li>
+      <li>
+        <Button
+          label="Inställningar"
+          @click="toggleSettings"
+          class="gray-button"
+        />
+      </li>
     </ul>
   </nav>
 </template>
 
 <script>
+import Button from "primevue/button";
+
 export default {
+  components: {
+    Button,
+  },
   methods: {
     toggleSettings() {
       this.$emit("toggle-settings");
@@ -18,7 +29,6 @@ export default {
 
 <style scoped>
 nav {
-  background-color: #333;
   color: white;
   padding: 10px;
 }
@@ -31,17 +41,16 @@ ul {
   gap: 20px;
 }
 
-a,
-button {
+.gray-button {
+  background-color: gray;
+  border: 1px solid #ccc;
   color: white;
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
 }
 
-button:focus,
-a:focus {
-  outline: none;
+.gray-button:hover {
+  background-color: darkgray;
 }
 </style>
