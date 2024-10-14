@@ -5,7 +5,7 @@
         <img :src="babysquare" alt="Loading Image" class="loading-image" />
         <div class="loading-text">
           <h2>Laddar...</h2>
-          <p>Spelen börjar straks</p>
+          <p>Spelen börjar strax</p>
         </div>
       </div>
 
