@@ -85,11 +85,15 @@ export default {
   methods: {
     showModersmalGame() {
       this.showModersmal = true;
-      document.querySelector(".background-overlay").style.backgroundImage = `url(${spaceBackground})`;
+      document.querySelector(
+        ".background-overlay"
+      ).style.backgroundImage = `url(${spaceBackground})`;
     },
     backToMenu() {
       this.showModersmal = false;
-      document.querySelector(".background-overlay").style.backgroundImage = `url(${backgroundImage})`;
+      document.querySelector(
+        ".background-overlay"
+      ).style.backgroundImage = `url(${backgroundImage})`;
     },
     toggleSettings() {
       this.showSettings = !this.showSettings;
@@ -101,7 +105,9 @@ export default {
 
         if (gameType === "math") {
           this.showMathGame = true;
-          document.querySelector(".background-overlay").style.backgroundImage = `url(${waterbackground})`;
+          document.querySelector(
+            ".background-overlay"
+          ).style.backgroundImage = `url(${waterbackground})`;
         } else if (gameType === "modersmal") {
           this.showModersmal = true;
           this.showModersmalGame();
@@ -124,7 +130,9 @@ export default {
     },
   },
   mounted() {
-    document.querySelector(".background-overlay").style.backgroundImage = `url(${this.backgroundImage})`;
+    document.querySelector(
+      ".background-overlay"
+    ).style.backgroundImage = `url(${this.backgroundImage})`;
 
     axios
       .get("http://localhost:5000/api/hello")

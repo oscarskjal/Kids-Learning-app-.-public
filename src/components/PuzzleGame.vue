@@ -11,15 +11,35 @@
         {{ tile }}
       </div>
     </div>
-    <button @click="shuffleTiles">Shuffle</button>
-    <button @click="toggleFigures">Back to Figures</button>
 
-    <div v-if="isGameWon" class="winning-message">{{ winningMessage }}</div>
+    <Button
+      label="Shuffle"
+      @click="shuffleTiles"
+      class="p-button-raised p-button-info"
+    />
+
+    <Button
+      label="Back to Figures"
+      @click="toggleFigures"
+      class="p-button-raised p-button-secondary"
+    />
+
+    <div v-if="isGameWon" class="winning-message">
+      <span v-if="winningMessage === 'Fantastiskt!!'" class="fantastiskt">{{
+        winningMessage
+      }}</span>
+      <span v-else>{{ winningMessage }}</span>
+    </div>
   </div>
 </template>
 
 <script>
+import Button from "primevue/button";
+
 export default {
+  components: {
+    Button,
+  },
   props: {
     toggleFigures: {
       type: Function,
@@ -135,5 +155,34 @@ export default {
   font-weight: bold;
   margin-top: 20px;
   color: green;
+}
+
+.fantastiskt {
+  font-size: 28px;
+  font-weight: bold;
+  background: linear-gradient(
+    90deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowing 1.5s infinite alternate;
+}
+
+@keyframes glowing {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.7), 0 0 10px rgba(255, 0, 0, 0.5),
+      0 0 15px rgba(255, 0, 0, 0.3);
+  }
+  100% {
+    text-shadow: 0 0 10px rgba(255, 0, 255, 1), 0 0 20px rgba(255, 0, 255, 0.8),
+      0 0 30px rgba(255, 0, 255, 0.5);
+  }
 }
 </style>
