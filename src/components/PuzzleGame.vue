@@ -170,7 +170,10 @@ export default {
     indigo,
     violet
   );
-  -webkit-background-clip: text;
+  -webkit-background-clip: text; /* Finns 100% lättare sätt att göra dethär */
+  -moz-background-clip: text;
+  -o-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: glowing 1.5s infinite alternate;
 }
